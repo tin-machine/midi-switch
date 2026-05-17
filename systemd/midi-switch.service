@@ -1,0 +1,16 @@
+[Unit]
+Description=nanoKONTROL2 HDMI input switcher
+After=sound.target graphical-session.target
+Wants=sound.target
+
+[Service]
+Type=simple
+ExecStart=%h/.local/bin/midi-switch -config %h/.config/midi-switch/config.yaml
+Restart=on-failure
+RestartSec=3
+
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=default.target

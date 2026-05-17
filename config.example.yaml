@@ -1,0 +1,163 @@
+midi:
+  port_name: "nanoKONTROL2"
+  port: "24:0"
+
+defaults:
+  cooldown_ms: 700
+  command_timeout_sec: 5
+  ddc_throttle_ms: 500
+
+actions:
+  - name: display1-input-hdmi1
+    event:
+      type: control_change
+      controller: 50
+      value_min: 1
+    ddc:
+      bus: 2
+      vcp: "60"
+      value: "0x11"
+      noverify: true
+
+  - name: display2-input-hdmi1
+    event:
+      type: control_change
+      controller: 49
+      value_min: 1
+    ddc:
+      bus: 3
+      vcp: "60"
+      value: "0x11"
+      noverify: true
+
+  - name: display3-input-hdmi1
+    event:
+      type: control_change
+      controller: 48
+      value_min: 1
+    ddc:
+      bus: 4
+      vcp: "60"
+      value: "0x11"
+      noverify: true
+
+  - name: display1-input-hdmi2
+    event:
+      type: control_change
+      controller: 66
+      value_min: 1
+    ddc:
+      bus: 2
+      vcp: "60"
+      value: "0x12"
+      noverify: true
+
+  - name: display2-input-hdmi2
+    event:
+      type: control_change
+      controller: 65
+      value_min: 1
+    ddc:
+      bus: 3
+      vcp: "60"
+      value: "0x12"
+      noverify: true
+
+  - name: display3-input-hdmi2
+    event:
+      type: control_change
+      controller: 64
+      value_min: 1
+    ddc:
+      bus: 4
+      vcp: "60"
+      value: "0x12"
+      noverify: true
+
+  - name: display1-brightness
+    event:
+      type: control_change
+      controller: 2
+    ddc:
+      bus: 2
+      vcp: "10"
+      scale_from_midi: true
+      min: 0
+      max: 100
+      noverify: true
+      throttle_ms: 500
+
+  - name: display2-brightness
+    event:
+      type: control_change
+      controller: 1
+    ddc:
+      bus: 3
+      vcp: "10"
+      scale_from_midi: true
+      min: 0
+      max: 100
+      noverify: true
+      throttle_ms: 500
+
+  - name: display3-brightness
+    event:
+      type: control_change
+      controller: 0
+    ddc:
+      bus: 4
+      vcp: "10"
+      scale_from_midi: true
+      min: 0
+      max: 100
+      noverify: true
+      throttle_ms: 500
+
+  - name: display1-contrast
+    event:
+      type: control_change
+      controller: 18
+    ddc:
+      bus: 2
+      vcp: "12"
+      scale_from_midi: true
+      min: 0
+      max: 100
+      noverify: true
+      throttle_ms: 500
+
+  - name: display2-contrast
+    event:
+      type: control_change
+      controller: 17
+    ddc:
+      bus: 3
+      vcp: "12"
+      scale_from_midi: true
+      min: 0
+      max: 100
+      noverify: true
+      throttle_ms: 500
+
+  - name: display3-contrast
+    event:
+      type: control_change
+      controller: 16
+    ddc:
+      bus: 4
+      vcp: "12"
+      scale_from_midi: true
+      min: 0
+      max: 100
+      noverify: true
+      throttle_ms: 500
+
+  - name: ubuntu-default-sink-volume
+    event:
+      type: control_change
+      controller: 7
+    volume:
+      target: "@DEFAULT_SINK@"
+      min: 0
+      max: 100
+      throttle_ms: 300
