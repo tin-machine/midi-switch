@@ -39,18 +39,25 @@ ALSA sequencer: client 24:0 'nanoKONTROL2 _ CTRL'
 Display1 HDMI-1: controller 50
 Display2 HDMI-1: controller 49
 Display3 HDMI-1: controller 48
+All displays HDMI-1: controller 51
 
 Display1 HDMI-2: controller 66
 Display2 HDMI-2: controller 65
 Display3 HDMI-2: controller 64
+All displays HDMI-2: controller 67
+
+All displays power off: controller 43
+All displays power on: controller 44
 
 Display1 brightness: controller 2
 Display2 brightness: controller 1
 Display3 brightness: controller 0
+All displays brightness: controller 3
 
 Display1 contrast: controller 18
 Display2 contrast: controller 17
 Display3 contrast: controller 16
+All displays contrast: controller 19
 
 Ubuntu default sink volume: controller 7
 ```
@@ -60,6 +67,12 @@ Ubuntu default sink volume: controller 7
 連続値は MIDI `0..127` を DDC `0..100` に変換する。反応は重くてよい前提で、`ddc_throttle_ms: 500` にしている。
 
 Display1-3 の入力切替、明るさ、コントラストと Ubuntu Desktop の既定 sink 音量を現設定に入れている。
+
+同じ MIDI event を複数 action に設定すると、1つのボタンで複数の `ddcutil` command を順に実行できる。
+`controller 51` は Display1-3 をまとめて HDMI-1 へ、`controller 67` は Display1-3 をまとめて HDMI-2 へ切り替える action に割り当てている。
+`controller 43` は Display1-3 をまとめて DDC Power Mode `D6=05` で off/sleep へ、`controller 44` は Display1-3 をまとめて `D6=01` で on へ戻す action に割り当てている。
+off 後は通常の DDC check が失敗することがあるため、on action は `--skip-ddc-checks` 付きの `command` action にしている。
+同じ方式で、`controller 3` は Display1-3 の明るさ、`controller 19` は Display1-3 のコントラストをまとめて変更する action に割り当てている。
 
 ## 実行
 
@@ -113,4 +126,3 @@ aseqdump -p 24:0
 `ddcutil` は I2C bus を掴むため、並列実行すると flock diagnostic が出ることがある。この daemon では action 実行を直列化している。
 
 systemd user service でだけ DDC が失敗する場合は、`journalctl --user -u midi-switch.service` と `/dev/i2c-*` の ACL/group を確認する。必要なら `i2c` group への追加と再ログインを行う。
-# midi-switch

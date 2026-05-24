@@ -41,6 +41,39 @@ actions:
       value: "0x11"
       noverify: true
 
+  - name: all-displays-input-hdmi1-display1
+    event:
+      type: control_change
+      controller: 51
+      value_min: 1
+    ddc:
+      bus: 2
+      vcp: "60"
+      value: "0x11"
+      noverify: true
+
+  - name: all-displays-input-hdmi1-display2
+    event:
+      type: control_change
+      controller: 51
+      value_min: 1
+    ddc:
+      bus: 3
+      vcp: "60"
+      value: "0x11"
+      noverify: true
+
+  - name: all-displays-input-hdmi1-display3
+    event:
+      type: control_change
+      controller: 51
+      value_min: 1
+    ddc:
+      bus: 4
+      vcp: "60"
+      value: "0x11"
+      noverify: true
+
   - name: display1-input-hdmi2
     event:
       type: control_change
@@ -73,6 +106,129 @@ actions:
       vcp: "60"
       value: "0x12"
       noverify: true
+
+  - name: all-displays-input-hdmi2-display1
+    event:
+      type: control_change
+      controller: 67
+      value_min: 1
+    ddc:
+      bus: 2
+      vcp: "60"
+      value: "0x12"
+      noverify: true
+
+  - name: all-displays-input-hdmi2-display2
+    event:
+      type: control_change
+      controller: 67
+      value_min: 1
+    ddc:
+      bus: 3
+      vcp: "60"
+      value: "0x12"
+      noverify: true
+
+  - name: all-displays-input-hdmi2-display3
+    event:
+      type: control_change
+      controller: 67
+      value_min: 1
+    ddc:
+      bus: 4
+      vcp: "60"
+      value: "0x12"
+      noverify: true
+
+  - name: all-displays-power-off-display1
+    event:
+      type: control_change
+      controller: 43
+      value_min: 1
+    ddc:
+      bus: 2
+      vcp: "D6"
+      value: "05"
+      noverify: true
+
+  - name: all-displays-power-off-display2
+    event:
+      type: control_change
+      controller: 43
+      value_min: 1
+    ddc:
+      bus: 3
+      vcp: "D6"
+      value: "05"
+      noverify: true
+
+  - name: all-displays-power-off-display3
+    event:
+      type: control_change
+      controller: 43
+      value_min: 1
+    ddc:
+      bus: 4
+      vcp: "D6"
+      value: "05"
+      noverify: true
+
+  - name: all-displays-power-on-display1
+    event:
+      type: control_change
+      controller: 44
+      value_min: 1
+    command:
+      - ddcutil
+      - --bus
+      - "2"
+      - --skip-ddc-checks
+      - --sleep-multiplier
+      - "3"
+      - --maxtries
+      - "10,10,10"
+      - --noverify
+      - setvcp
+      - D6
+      - "01"
+
+  - name: all-displays-power-on-display2
+    event:
+      type: control_change
+      controller: 44
+      value_min: 1
+    command:
+      - ddcutil
+      - --bus
+      - "3"
+      - --skip-ddc-checks
+      - --sleep-multiplier
+      - "3"
+      - --maxtries
+      - "10,10,10"
+      - --noverify
+      - setvcp
+      - D6
+      - "01"
+
+  - name: all-displays-power-on-display3
+    event:
+      type: control_change
+      controller: 44
+      value_min: 1
+    command:
+      - ddcutil
+      - --bus
+      - "4"
+      - --skip-ddc-checks
+      - --sleep-multiplier
+      - "3"
+      - --maxtries
+      - "10,10,10"
+      - --noverify
+      - setvcp
+      - D6
+      - "01"
 
   - name: display1-brightness
     event:
@@ -113,6 +269,45 @@ actions:
       noverify: true
       throttle_ms: 500
 
+  - name: all-displays-brightness-display1
+    event:
+      type: control_change
+      controller: 3
+    ddc:
+      bus: 2
+      vcp: "10"
+      scale_from_midi: true
+      min: 0
+      max: 100
+      noverify: true
+      throttle_ms: 500
+
+  - name: all-displays-brightness-display2
+    event:
+      type: control_change
+      controller: 3
+    ddc:
+      bus: 3
+      vcp: "10"
+      scale_from_midi: true
+      min: 0
+      max: 100
+      noverify: true
+      throttle_ms: 500
+
+  - name: all-displays-brightness-display3
+    event:
+      type: control_change
+      controller: 3
+    ddc:
+      bus: 4
+      vcp: "10"
+      scale_from_midi: true
+      min: 0
+      max: 100
+      noverify: true
+      throttle_ms: 500
+
   - name: display1-contrast
     event:
       type: control_change
@@ -143,6 +338,45 @@ actions:
     event:
       type: control_change
       controller: 16
+    ddc:
+      bus: 4
+      vcp: "12"
+      scale_from_midi: true
+      min: 0
+      max: 100
+      noverify: true
+      throttle_ms: 500
+
+  - name: all-displays-contrast-display1
+    event:
+      type: control_change
+      controller: 19
+    ddc:
+      bus: 2
+      vcp: "12"
+      scale_from_midi: true
+      min: 0
+      max: 100
+      noverify: true
+      throttle_ms: 500
+
+  - name: all-displays-contrast-display2
+    event:
+      type: control_change
+      controller: 19
+    ddc:
+      bus: 3
+      vcp: "12"
+      scale_from_midi: true
+      min: 0
+      max: 100
+      noverify: true
+      throttle_ms: 500
+
+  - name: all-displays-contrast-display3
+    event:
+      type: control_change
+      controller: 19
     ddc:
       bus: 4
       vcp: "12"
